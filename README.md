@@ -1,7 +1,3 @@
-Here is a **clean, professional, GitHub-ready README.md** for your project:
-
----
-
 # **OS Security & Protection System**
 
 A modular, Bash-based security suite designed to enhance Linux system protection through **AES-256 encryption**, **user account control**, and **intrusion detection**.
