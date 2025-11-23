@@ -1,0 +1,12 @@
+# audit.log — OS Security Project
+# This file stores all system actions such as:
+# - encryption
+# - decryption
+# - user lock/unlock events
+# - brute-force monitoring usage
+#
+# Automatically appended by main.sh (log_action function)
+2025-11-23 12:32:04 - Started Sentinix (main.sh)
+2025-11-23 12:32:10 - Encryption requested by user
+2025-11-23 12:34:53 - Started Sentinix (main.sh)
+2025-11-23 12:34:55 - Exiting Sentinix

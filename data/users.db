@@ -1,0 +1,7 @@
+# users.db — OS Security Project
+# Format:
+# username:sha256_hash:role
+# Example:
+# admin:5e884898da28047151d0e56f8dc629...:admin
+# user:3c7a4a0aa5d7b7b8a3c9158...:user
+

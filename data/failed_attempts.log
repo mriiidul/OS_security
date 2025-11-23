@@ -1,0 +1,6 @@
+# failed_attempts.log — OS Security Project
+# Tracks number of failed login attempts per username
+# Format:
+# username:count
+#
+# This will be auto-filled when failed login logic is added.
