@@ -1,36 +1,25 @@
 #!/usr/bin/env bash
-# modules/brute_force_monitor.sh
 
-analyze_bruteforce() {
-    if [ -z "${SYS_AUTH_LOG:-}" ]; then
-        echo "System auth log not detected on this system."
-        return 1
-    fi
-    if [ ! -r "$SYS_AUTH_LOG" ]; then
-        echo "Cannot read $SYS_AUTH_LOG. Try running with sudo."
+analyze_and_block() {
+    if [ ! -f "$SYS_AUTH_LOG" ]; then
+        echo "Auth log not found."
         return 1
     fi
 
-    echo "Top 5 IPs with failed login attempts (from $SYS_AUTH_LOG):"
-    echo "Count  IP"
-    grep -Ei "failed password|authentication failure|invalid user" "$SYS_AUTH_LOG" \
+    echo "Scanning failed login attempts..."
+
+    grep -Ei "failed password|authentication failure" "$SYS_AUTH_LOG" \
         | grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' \
-        | sort | uniq -c | sort -nr | head -n 5
+        | sort | uniq -c | sort -nr > "$DATA_DIR/ip_fail_count.txt"
 
-    log_action "Executed brute-force analysis"
-}
+    while read -r count ip; do
+        if [ "$count" -ge 3 ]; then
+            echo "IP $ip has $count failed attempts — BLOCKING"
+            block_ip "$ip"
+        fi
+done < <(awk '{print $1, $2}'
+    "$DATA_DIR/ip_fail_count.txt")
 
-view_recent_failures() {
-    if [ -z "${SYS_AUTH_LOG:-}" ]; then
-        echo "System auth log not detected on this system."
-        return 1
-    fi
-    if [ ! -r "$SYS_AUTH_LOG" ]; then
-        echo "Cannot read $SYS_AUTH_LOG. Try running with sudo."
-        return 1
-    fi
-
-    echo "Last 10 failed authentication lines:"
-    grep -Ei "failed password|authentication failure|invalid user" "$SYS_AUTH_LOG" | tail -n 10
-    log_action "Viewed recent failures"
+    echo "Scan complete."
+    log_action "Performed auto-block scan"
 }

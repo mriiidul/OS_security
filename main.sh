@@ -14,6 +14,7 @@ source "$SCRIPT_DIR/modules/decryption.sh"
 source "$SCRIPT_DIR/modules/user_lock.sh"
 source "$SCRIPT_DIR/modules/user_unlock.sh"
 source "$SCRIPT_DIR/modules/brute_force_monitor.sh"
+source "$SCRIPT_DIR/modules/ip_block.sh"
 
 mkdir -p "$DATA_DIR"
 
@@ -39,7 +40,7 @@ while true; do
         2) decrypt_file ;;
         3) require_root && lock_user ;;
         4) require_root && unlock_user ;;
-        5) analyze_bruteforce ;;
+        5) analyze_and_block ;;
         6) view_recent_failures ;;
         7) cat "$AUDIT_LOG" || echo "No audit log yet." ;;
         8) log_action "Exiting Sentinix" ; echo "Goodbye."; exit 0 ;;
