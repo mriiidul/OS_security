@@ -5,11 +5,11 @@ BLOCKLIST="$DATA_DIR/blocklist.txt"
 block_ip() {
     local ip="$1"
 
-    echo "$ip" >> "$BLOCKLIST"
-    echo "Blocking IP: $ip"
+    echo "$(date) - $ip" >> "$BLOCKLIST"
 
+    echo "Blocking IP: $ip"
     sudo iptables -A INPUT -s "$ip" -j DROP
 
-    log_action "Blocked IP: $ip after repeated failed attempts"
+    log_action "Blocked IP: $ip"
 }
 

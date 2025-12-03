@@ -1,0 +1,27 @@
+2025-12-02T20:47:55.339681+00:00 Ubuntu sshd[8545]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=testuser
+2025-12-02T20:47:57.128022+00:00 Ubuntu sshd[8545]: Failed password for testuser from 192.168.0.102 port 39280 ssh2
+2025-12-02T20:48:03.315124+00:00 Ubuntu sshd[8545]: Failed password for testuser from 192.168.0.102 port 39280 ssh2
+2025-12-02T20:48:09.434386+00:00 Ubuntu sshd[8545]: Failed password for testuser from 192.168.0.102 port 39280 ssh2
+2025-12-02T20:48:10.899193+00:00 Ubuntu sshd[8545]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=testuser
+2025-12-02T20:52:35.096744+00:00 Ubuntu sshd[8713]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=testuser
+2025-12-02T20:52:36.924921+00:00 Ubuntu sshd[8713]: Failed password for testuser from 192.168.0.102 port 45330 ssh2
+2025-12-02T20:52:52.064083+00:00 Ubuntu sshd[8713]: message repeated 2 times: [ Failed password for testuser from 192.168.0.102 port 45330 ssh2]
+2025-12-02T20:52:53.358655+00:00 Ubuntu sshd[8713]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=testuser
+2025-12-02T21:01:39.161453+00:00 Ubuntu sshd[9102]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=testuser
+2025-12-02T21:01:41.297984+00:00 Ubuntu sshd[9102]: Failed password for testuser from 192.168.0.102 port 43052 ssh2
+2025-12-02T21:01:53.206541+00:00 Ubuntu sshd[9102]: message repeated 2 times: [ Failed password for testuser from 192.168.0.102 port 43052 ssh2]
+2025-12-02T21:01:54.927739+00:00 Ubuntu sshd[9102]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=testuser
+2025-12-02T21:35:23.802213+00:00 Ubuntu sshd[6813]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=sani
+2025-12-02T21:35:26.918637+00:00 Ubuntu sshd[6813]: Failed password for sani from 192.168.0.102 port 55774 ssh2
+2025-12-02T21:35:39.265755+00:00 Ubuntu sshd[6813]: message repeated 2 times: [ Failed password for sani from 192.168.0.102 port 55774 ssh2]
+2025-12-02T21:35:40.373071+00:00 Ubuntu sshd[6813]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.102  user=sani
+2025-12-03T07:59:02.135664+00:00 Ubuntu sshd[4434]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.107  user=sani
+2025-12-03T07:59:04.063546+00:00 Ubuntu sshd[4434]: Failed password for sani from 192.168.0.107 port 13944 ssh2
+2025-12-03T07:59:22.384953+00:00 Ubuntu sshd[4434]: message repeated 2 times: [ Failed password for sani from 192.168.0.107 port 13944 ssh2]
+2025-12-03T07:59:22.875664+00:00 Ubuntu sshd[4434]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.0.107  user=sani
+2025-12-03T08:09:34.028940+00:00 Ubuntu sudo:   mridul : TTY=pts/0 ; PWD=/home/mridul/OS_security/OS_security ; USER=root ; COMMAND=/usr/bin/bash grep -Ei 'Failed password' /var/log/auth.log
+2025-12-03T08:10:00.592660+00:00 Ubuntu sudo:   mridul : TTY=pts/0 ; PWD=/home/mridul/OS_security/OS_security ; USER=root ; COMMAND=/usr/bin/grep -Ei 'Failed password' /var/log/auth.log
+2025-12-03T08:33:56.290493+00:00 Ubuntu sudo: pam_unix(sudo:auth): authentication failure; logname=mridul uid=1001 euid=0 tty=/dev/pts/3 ruser=sani rhost=  user=sani
+2025-12-03T08:37:46.864709+00:00 Ubuntu sudo: pam_unix(sudo:auth): authentication failure; logname=mridul uid=1001 euid=0 tty=/dev/pts/3 ruser=maruf rhost=  user=maruf
+2025-12-03T08:38:23.916018+00:00 Ubuntu su: pam_unix(su-l:auth): authentication failure; logname=mridul uid=1001 euid=0 tty=/dev/pts/3 ruser=maruf rhost=  user=mridul
+2025-12-03T08:43:30.522754+00:00 Ubuntu sudo: pam_unix(sudo:auth): authentication failure; logname=mridul uid=1001 euid=0 tty=/dev/pts/5 ruser=maruf rhost=  user=maruf
