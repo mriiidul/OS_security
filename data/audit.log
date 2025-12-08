@@ -64,3 +64,19 @@
 2025-12-03 08:44:17 - Brute-force scan complete
 2025-12-03 08:44:26 - Started Sentinix (main.sh)
 2025-12-03 08:44:33 - Exiting Sentinix
+2025-12-08 15:47:53 - Started Sentinix (main.sh)
+2025-12-08 15:47:58 - Encryption requested by user
+2025-12-08 15:49:23 - Started Sentinix (main.sh)
+2025-12-08 15:49:25 - Encryption requested by user
+2025-12-08 15:50:05 - Started Sentinix (main.sh)
+2025-12-08 15:50:06 - Encryption requested by user
+2025-12-08 15:50:56 - Started Sentinix (main.sh)
+2025-12-08 15:50:57 - Encryption requested by user
+2025-12-08 15:51:20 - Encrypted: /home/mridul/Documents/okay.txt -> /home/mridul/Documents/okay.txt.enc
+2025-12-08 15:51:25 - Original removed: /home/mridul/Documents/okay.txt
+2025-12-08 15:51:45 - Decryption requested by user
+2025-12-08 15:52:15 - Started Sentinix (main.sh)
+2025-12-08 15:52:17 - Decryption requested by user
+2025-12-08 15:52:37 - Decrypted: /home/mridul/Documents/okay.txt.enc -> /home/mridul/Documents/okay.txt
+2025-12-08 16:00:03 - Started Sentinix (main.sh)
+2025-12-08 16:02:05 - Exiting Sentinix
