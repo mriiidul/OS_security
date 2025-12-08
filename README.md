@@ -1,158 +1,192 @@
-# **OS Security & Protection System**
-
-A modular, Bash-based security suite designed to enhance Linux system protection through **AES-256 encryption**, **user account control**, and **intrusion detection**.
-This project was built as part of the *Operating Systems Lab* course.
-
----
-
-## 🔐 **Project Overview**
-
-The **OS Security & Protection System** provides essential OS-level protection features without third-party dependencies—only pure Linux commands and Bash scripting.
-It demonstrates practical concepts like:
-
-* Cryptographic file protection
-* Authentication hardening
-* User account management
-* System log monitoring
-
-This project is lightweight, educational, and fully CLI-based.
+```markdown
+# OS SECURITY & PROTECTION SYSTEM
+A Bash-based security automation project designed for Operating System coursework.  
+This system analyzes failed login attempts, blocks brute-force attackers automatically, manages user accounts, and provides AES-256 file encryption/decryption — all using shell scripting.
 
 ---
 
-## ⚙️ **Features**
+## FEATURES
 
-### 🔒 File Security
+### 1. File Encryption (AES-256)
+Encrypt any file on the system using OpenSSL AES-256-CBC.  
+Supports absolute file paths (Documents, Desktop, etc.).
 
-* AES-256-CBC encryption using OpenSSL
-* PBKDF2 key strengthening
-* Secure file deletion (optional, using `shred`)
-* Safe file decryption with password validation
+### 2. File Decryption
+Decrypt previously encrypted `.enc` files securely.
 
-### 👥 User Account Protection
+### 3. User Account Locking
+Lock a Linux system user account (prevents login).  
+Requires root privileges.
 
-* Lock system accounts (`passwd -l`)
-* Unlock system accounts (`passwd -u`)
-* Prevent unauthorized system access
+### 4. User Account Unlocking
+Unlock previously locked accounts.
 
-### 🛡 Intrusion Detection
+### 5. Brute-Force Attack Analysis
+- Reads `/var/log/auth.log`  
+- Detects failed SSH login attempts  
+- Extracts and counts attacker IPs  
+- Displays top failed attempts  
+- Helps analyze live attack patterns
 
-* Scans `/var/log/auth.log` or `/var/log/secure`
-* Detects brute-force SSH login attempts
-* Shows top attacker IP addresses
-* Lists recent failed login attempts
+### 6. Automatic IP Blocking
+If an IP exceeds the threshold (default: 3 failed attempts), the system:
+- Blocks the IP using `iptables`
+- Logs the action
+- Saves it in `data/blocklist.txt`
 
-### 📁 Logging
-
-* All actions stored in `data/audit.log`
-* Useful for tracking usage and security events
-
-### 🧩 Modular Architecture
-
-* Separate scripts for each feature
-* Easy to maintain and upgrade
-
-### 🖥 Menu-Driven Interface
-
-* Centralized control via `main.sh`
-* Simple, clean, user-friendly CLI
+### 7. Audit Logging
+All actions are saved in `data/audit.log`, including timestamps:
+- Encryption/Decryption events  
+- IP blocks  
+- User lock/unlock  
+- Brute-force scans  
 
 ---
 
-## 📂 **Project Structure**
+## PROJECT STRUCTURE
 
 ```
+
 OS_security/
-│── main.sh
-│── config/
-│   └── settings.conf
-│── lib/
-│   └── utils.sh
-│── modules/
-│   ├── encryption.sh
-│   ├── decryption.sh
-│   ├── user_lock.sh
-│   ├── user_unlock.sh
-│   └── brute_force_monitor.sh
-│── data/
-│   ├── audit.log
-│   ├── failed_attempts.log
-│   └── users.db
+│
+├── main.sh                   # Main control script
+│
+├── config/
+│   └── settings.conf         # Global configuration and paths
+│
+├── modules/
+│   ├── brute_force_monitor.sh  # Detect & block brute-force attacks
+│   ├── ip_block.sh             # Block/unblock IPs via iptables
+│   ├── encryption.sh           # AES-256 encryption
+│   ├── decryption.sh           # AES-256 decryption
+│   ├── user_lock.sh            # Lock a user account
+│   ├── user_unlock.sh          # Unlock a user account
+│   └── utils.sh                # Logging functions & helpers
+│
+├── data/
+│   ├── audit.log               # Logs of actions performed
+│   ├── blocklist.txt           # Blocked IP history
+│   └── temp files              # Extracted IP lists, counts, etc.
+│
 └── README.md
-```
+
+````
 
 ---
 
-## 🚀 **How to Run**
+## HOW TO RUN
 
-### 1️⃣ Make scripts executable:
+### 1. Clone the repository
+```bash
+git clone https://github.com/mriiidul/OS_security.git
+cd OS_security/OS_security
+````
+
+### 2. Give execute permission
 
 ```bash
 chmod +x main.sh
-chmod -R +x modules
-chmod -R +x lib
+chmod -R +x modules/
 ```
 
-### 2️⃣ Install OpenSSL (if needed):
-
-```bash
-sudo apt install openssl -y
-```
-
-### 3️⃣ Run the program:
-
-Normal mode:
-
-```bash
-./main.sh
-```
-
-Root mode (recommended for account control):
+### 3. Run the system
 
 ```bash
 sudo ./main.sh
 ```
 
----
+*Root privileges are recommended for:*
 
-## 🧪 **Tested On**
-
-* Ubuntu 20.04 / 22.04
-* Debian 11
-* Fedora 38
-* WSL2 (Windows Subsystem for Linux)
+* Checking /var/log/auth.log
+* Blocking attacker IPs
+* Locking/unlocking system accounts
 
 ---
 
-## 🤝 **Collaboration**
+## BRUTE-FORCE DETECTION WORKFLOW
 
-This project is maintained by a team using **Git** and **GitHub** for version control.
+1. Read system log:
 
-### GitHub repository:
+```
+/var/log/auth.log
+```
 
-🔒 Private Repo
-[https://github.com/mriiidul/OS_security](https://github.com/mriiidul/OS_security)
+2. Extract failed login entries
+3. Extract attacker IP addresses using regex
+4. Count attempts per IP
+5. Sort results (highest first)
+6. If attempts ≥ threshold → block IP
+7. Log all actions
 
-Contributions follow Git workflow:
+Example detection output:
 
-```bash
-git add .
-git commit -m "your message"
-git push
+```
+17 192.168.0.102
+4  192.168.0.107
+```
+
+Example block event:
+
+```
+Blocking IP: 192.168.0.102
 ```
 
 ---
 
-## 🔮 **Future Enhancements**
+## RUN AS A CRONJOB (Optional)
 
-* Add user-level authentication with a script-managed login system
-* Implement IP auto-blocking using UFW or iptables
-* Build a GUI using Zenity
-* Add RSA-based file encryption option
-* Develop a live monitoring dashboard
+To auto-scan every minute:
+
+```bash
+sudo crontab -e
+```
+
+Add:
+
+```
+* * * * * /home/mridul/OS_security/OS_security/main.sh --auto
+```
 
 ---
 
-## 📜 **License**
+## REQUIREMENTS
 
-This project is created for educational purposes under the Operating Systems Lab course.
-Feel free to reference, fork (if repo becomes public), or extend with proper credit.
+* Ubuntu / Linux system
+* Bash shell
+* OpenSSL
+* iptables
+* Root/sudo access
+
+Install dependencies:
+
+```bash
+sudo apt update
+sudo apt install openssl iptables
+```
+
+---
+
+## TEAM WORK USING GITHUB
+
+This project supports group collaboration through:
+
+* Private GitHub repository
+* Branching and merging
+* Commit tracking
+* Team-based development workflow
+
+---
+
+## PURPOSE
+
+This project demonstrates real OS-level security operations using shell scripting:
+
+* System log analysis
+* Attack detection
+* Firewall automation
+* File security
+* User management
+
+Perfect for university assignments, security demos, and practical OS labs.
+
+---
